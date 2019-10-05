@@ -88,22 +88,22 @@ We will use [Jest](https://jestjs.io/en/) as our library because it covers every
 
 ## Our task
 
-Our task is to implement the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) using TDD. First we will build the engine, and then we will build a front end solution.
+Our task is to implement the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) using TDD. First we will build the engine, and then we will build a front end solution. We're not going to get into functional programming, Object Oriented programming etc, for this we'll just be concentrating on writing tests and breaking a problem down into component parts.
 
-Check out a finished version of the project to get an idea what it is. The game is grid based consisting of cells that are either alive or dead. Through each cycle of life this algorithm applies:
+Check out the [completed version](./completed) of the project to get an idea what it is. The game is grid based consisting of cells that are either alive or dead. Through each cycle of life this algorithm applies:
 
 - any live cell with fewer than two live neigbours dies, as if by under-population
 - any live cell with two or three live neighbours lives on to the next generation
 - any live cell with more than three live neighbours dies, as if by overpopulation
 - any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
 
-For our example we want to see the game in a browser. This is one of the great things about Jest - browser objects such as `window` and `document` are already stubbed for us. A convention for Jest is to put test files in a `__tests__` folder.
+For our example we want to see the game in a browser. This is one of the great things about Jest - browser objects such as `window` and `document` are already stubbed for us.
 
-We have a basic bootstrap for our project, an html page (includes styles and basic controls), empty test, and the main game file.
+We have a basic bootstrap for our project, an html page (includes styles and basic controls), empty test, and the main game file in the [game-of-life folder](./game-of-life). A convention for Jest is to put test files in a `__tests__` folder, so a starting test file exists there.
 
 ## Running tests
 
-Once we have run `npm install` and have our code loaded we can being testing using `jest` from the command line. Running this command after each change is quite tedious, so jest has a `--watch` flag to make tests run when it detects any change to the code.
+Once we have run `npm install` we can being testing using `jest` from the command line. Running this command after each change is quite tedious, so jest has a `--watch` flag to make tests run when it detects any change to the code.
 
 We can also use Jest to check our code coverage using the `coverage` flag: `jest --coverage`. Looking good! Lets now start working on implementing a grid for the game.
 
@@ -218,6 +218,19 @@ describe("algorithm", () => {
 ```
 
 The solution looks so simple compared to my initial apprehension of complexity of the game. Confidence comes from the tests.
+
+### Cells
+
+For us to apply the algorithm we need a cell with neighbours, so lets work on that next. Lets call the function `generate`, and taking a square root.
+
+```js
+describe("generate cells", () => {
+  it("should return array of length * length", () => {
+    const cells = generate(1);
+    expect(cells).toEqual([0]);
+  });
+});
+```
 
 ## References
 

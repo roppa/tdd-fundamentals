@@ -7,9 +7,14 @@ const add = (...args) =>
   args.reduce((accumulator, next) => accumulator + (next || 0), 0);
 
 const leftColumnSum = (index, width, cells) =>
-  index % width ? [cells[index - 1 - width], cells[index - 1], cells[index - 1 + width]] : [];
+  index % width
+    ? [cells[index - 1 - width], cells[index - 1], cells[index - 1 + width]]
+    : [];
+
 const rightColumnSum = (index, width, cells) =>
-  (index + 1) % width ? [cells[index + 1 - width], cells[index + 1], cells[index + 1 + width]] : [];
+  (index + 1) % width
+    ? [cells[index + 1 - width], cells[index + 1], cells[index + 1 + width]]
+    : [];
 
 const countLiveNeighbours = (cells, index) => {
   const width = Math.sqrt(cells.length);
@@ -73,9 +78,9 @@ const stop = () => clearInterval(gameLoop);
 
 const attachCellClickEvent = () => {
   document.querySelector("#grid").addEventListener("click", event => {
-    event.target.className = event.target.className.includes("alive") ?
-      event.target.className.replace(/alive/g, "dead") :
-      event.target.className.replace(/dead/g, "alive");
+    event.target.className = event.target.className.includes("alive")
+      ? event.target.className.replace(/alive/g, "dead")
+      : event.target.className.replace(/dead/g, "alive");
   });
 };
 
