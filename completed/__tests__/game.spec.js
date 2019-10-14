@@ -74,7 +74,7 @@ describe("game of life", () => {
 
   describe("browser grid", () => {
     test("should display living and dead cells", () => {
-      document.body.innerHTML = '<div id="grid"></grid>';
+      document.body.innerHTML = '<div id="grid"></div>';
       drawGrid([0, 0, 1, 1]);
       expect(document.querySelectorAll(".row").length).toEqual(2);
       expect(document.querySelectorAll(".cell").length).toEqual(4);
@@ -90,7 +90,7 @@ describe("game of life", () => {
 
   describe("event handler for grid", () => {
     test("click on cell should toggle live/dead", () => {
-      document.body.innerHTML = '<div id="grid"></grid>';
+      document.body.innerHTML = '<div id="grid"></div>';
       drawGrid([0]);
       attachGridEventHandler();
       expect(document.querySelectorAll(".dead").length).toEqual(1);
@@ -106,7 +106,7 @@ describe("game of life", () => {
 
   describe("get cells from dom", () => {
     test("should get living and dead cells from dom", () => {
-      document.body.innerHTML = '<div id="grid"></grid>';
+      document.body.innerHTML = '<div id="grid"></div>';
       const cells = [0, 0, 1, 1];
       drawGrid(cells);
       expect(getCellsFromDom()).toEqual(cells);
@@ -114,7 +114,7 @@ describe("game of life", () => {
   });
 
   describe("start function", () => {
-    document.body.innerHTML = '<div id="grid"></grid>';
+    document.body.innerHTML = '<div id="grid"></div>';
     const getCellsFromDomSpy = jest.spyOn(game, "getCellsFromDom");
     const regenerateSpy = jest.spyOn(game, "regenerate");
     const drawGridSpy = jest.spyOn(game, "drawGrid");

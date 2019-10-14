@@ -28,7 +28,7 @@ Tools: Node.js (> v8.4.0), an IDE such as VS Code, a Browser
   <dd>measuring how well code copes with stress</dd>
   <dt>Code coverage</dt>
   <dd>measures how many times a line, statement, branch (if/else) or function etc is executed</dd>
-  <dt>e2e (end to end) testing</dt>
+  <dt>E2E (end to end) testing</dt>
   <dd>testing a user journey through software from start to achieving the journeys goal</dd>
 </dl>
 
@@ -231,6 +231,10 @@ describe("generate cells", () => {
   });
 });
 ```
+
+## DOM
+
+Jest comes with a **mock** DOM environment, `jsdom`, which simulates the DOM as if you were in the browser! Again, this is one of the great things about Jest - it covers a lot of bases.
 
 ## References
 
