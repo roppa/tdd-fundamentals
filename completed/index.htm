@@ -1,122 +1,121 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Game of Life</title>
+    <meta charset="utf-8" />
+    <script src="game.js"></script>
+    <style>
+      html {
+        background-color: #f1f1f1;
+        font-family: sans-serif;
+      }
 
-<head>
-  <title>Game of Life</title>
-  <meta charset="utf-8" />
-  <script src="game.js"></script>
-  <style>
-    html {
-      background-color: #f1f1f1;
-      font-family: sans-serif;
-    }
+      body,
+      section {
+        margin: 0 auto;
+      }
 
-    body,
-    section {
-      margin: 0 auto;
-    }
+      body {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 4rem;
+      }
 
-    body {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 4rem;
-    }
+      h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+      button {
+        background-color: #0078e7;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5em 1em;
+      }
 
-    button {
-      background-color: #0078e7;
-      color: #fff;
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0.5em 1em;
-    }
+      button:disabled {
+        background-color: #ccc;
+      }
 
-    button:disabled {
-      background-color: #ccc;
-    }
+      #controls {
+        margin-bottom: 2rem;
+      }
 
-    #controls {
-      margin-bottom: 2rem;
-    }
+      #grid {
+        border: 1px solid #808080;
+      }
 
-    #grid {
-      border: 1px solid #808080;
-    }
+      .row {
+        margin: 0;
+        padding: 0;
+        flex: 1;
+        display: flex;
+      }
 
-    .row {
-      margin: 0;
-      padding: 0;
-      flex: 1;
-      display: flex;
-    }
+      .cell {
+        height: 10px;
+        width: 10px;
+        margin: 0;
+        padding: 0;
+        background-color: #82b7dc;
+        border: 1px solid #808080;
+      }
 
-    .cell {
-      height: 10px;
-      width: 10px;
-      margin: 0;
-      padding: 0;
-      background-color: #82b7dc;
-      border: 1px solid #808080;
-    }
+      .cell.live {
+        background-color: #1c1c1c;
+      }
+    </style>
+  </head>
 
-    .cell.alive {
-      background-color: #1c1c1c;
-    }
-  </style>
-</head>
+  <body>
+    <h1>Game of Life</h1>
+    <section>
+      <h2>Rules:</h2>
+      <ul>
+        <li>
+          any live cell with fewer than two live neighbours dies, as if by
+          under-population
+        </li>
+        <li>
+          any live cell with two or three live neighbours lives on to the next
+          generation
+        </li>
+        <li>
+          any live cell with more than three live neighbours dies, as if by
+          overpopulation
+        </li>
+        <li>
+          any dead cell with exactly three live neighbours becomes a live cell,
+          as if by reproduction
+        </li>
+      </ul>
+      <p>
+        Click squares to create living cells (clicking living cells kills them)
+      </p>
+    </section>
+    <section id="controls">
+      <button id="start">Start</button>
+      <button id="stop" disabled>Stop</button>
+    </section>
+    <section id="grid"></section>
+    <script>
+      const startButton = document.getElementById("start");
+      const stopButton = document.getElementById("stop");
+      game.drawGrid(game.generate(50));
+      game.attachGridEventHandler();
 
-<body>
-  <h1>Game of Life</h1>
-  <section>
-    <h2>Rules:</h2>
-    <ul>
-      <li>
-        any live cell with fewer than two live neighbours dies, as if by
-        under-population
-      </li>
-      <li>
-        any live cell with two or three live neighbours lives on to the next
-        generation
-      </li>
-      <li>
-        any live cell with more than three live neighbours dies, as if by
-        overpopulation
-      </li>
-      <li>
-        any dead cell with exactly three live neighbours becomes a live cell,
-        as if by reproduction
-      </li>
-    </ul>
-    <p>
-      Click squares to create living cells (clicking living cells kills them)
-    </p>
-  </section>
-  <section id="controls">
-    <button id="start">Start</button>
-    <button id="stop" disabled>Stop</button>
-  </section>
-  <section id="grid"></section>
-  <script>
-    const startButton = document.getElementById("start");
-    const stopButton = document.getElementById("stop");
-    drawGrid(generate(50));
-    attachCellClickEvent();
-    startButton.onclick = event => {
-      startButton.setAttribute("disabled", true);
-      stopButton.removeAttribute("disabled");
-      game.start();
-    };
+      startButton.onclick = event => {
+        startButton.setAttribute("disabled", true);
+        stopButton.removeAttribute("disabled");
+        game.start();
+      };
 
-    stopButton.onclick = event => {
-      startButton.removeAttribute("disabled");
-      stopButton.setAttribute("disabled", true);
-      game.stop();
-    };
-  </script>
-</body>
-
+      stopButton.onclick = event => {
+        startButton.removeAttribute("disabled");
+        stopButton.setAttribute("disabled", true);
+        game.stop();
+      };
+    </script>
+  </body>
 </html>

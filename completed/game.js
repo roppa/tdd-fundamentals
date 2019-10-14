@@ -1,33 +1,33 @@
-const isAlive = (alive, neighbours) =>
-  (Boolean(alive) && neighbours === 2) || neighbours === 3 ? 1 : 0;
+const isAlive = (cell, neighbours) =>
+  neighbours === 3 || (Boolean(cell) && neighbours === 2) ? 1 : 0;
 
-const generate = width => new Array(width * width).fill(0);
+const generate = root => new Array(root * root).fill(0);
 
 const add = (...args) =>
-  args.reduce((accumulator, next) => accumulator + (next || 0), 0);
+  args.reduce((accumulator, current) => accumulator + (current || 0), 0);
 
-const leftColumnSum = (index, width, cells) =>
+const leftColumnValues = (index, width, cells) =>
   index % width
-    ? [cells[index - 1 - width], cells[index - 1], cells[index - 1 + width]]
+    ? [cells[index - 1], cells[index - width - 1], cells[index + width - 1]]
     : [];
 
-const rightColumnSum = (index, width, cells) =>
+const rightColumnValues = (index, width, cells) =>
   (index + 1) % width
-    ? [cells[index + 1 - width], cells[index + 1], cells[index + 1 + width]]
+    ? [cells[index + 1], cells[index - width + 1], cells[index + width + 1]]
     : [];
 
-const countLiveNeighbours = (cells, index) => {
+const countNeighbours = (cells, index) => {
   const width = Math.sqrt(cells.length);
   return add(
     cells[index - width],
     cells[index + width],
-    ...leftColumnSum(index, width, cells),
-    ...rightColumnSum(index, width, cells)
+    ...leftColumnValues(index, width, cells),
+    ...rightColumnValues(index, width, cells)
   );
 };
 
 const regenerate = cells =>
-  cells.map((cell, index) => isAlive(cell, countLiveNeighbours(cells, index)));
+  cells.map((cell, index) => isAlive(cell, countNeighbours(cells, index)));
 
 const createElement = className => {
   const element = document.createElement("div");
@@ -37,62 +37,55 @@ const createElement = className => {
 
 const drawGrid = cells => {
   const width = Math.sqrt(cells.length);
+  const grid = document.getElementById("grid");
   const container = createElement("container");
-  const grid = document.querySelector("#grid");
   let row;
   cells.forEach((cell, index) => {
     if (index % width === 0) {
       row = createElement("row");
       container.appendChild(row);
     }
-    row.appendChild(
-      createElement(
-        `cell ${cell ? "alive alive" : "dead dead"}-${index}`,
-        index
-      )
-    );
+    const cellEl = createElement(`cell ${cell === 0 ? "dead" : "live"}`);
+    row.appendChild(cellEl);
   });
   grid.innerHTML = "";
   grid.appendChild(container);
 };
 
-let gameLoop;
-
-const getCellsFromDom = () => {
-  const genesis = [];
-  document
-    .querySelectorAll(".cell")
-    .forEach(cell => genesis.push(cell.className.includes("alive") ? 1 : 0));
-  return genesis;
+const attachGridEventHandler = () => {
+  document.getElementById("grid").addEventListener("click", event => {
+    const className = event.target.className;
+    event.target.className = className.includes("dead")
+      ? className.replace("dead", "live")
+      : className.replace("live", "dead");
+  });
 };
 
+const getCellsFromDom = () =>
+  Array.from(document.querySelectorAll(".cell")).map(cell =>
+    cell.className.includes("dead") ? 0 : 1
+  );
+
+let gameLoop;
+
 const start = () => {
-  let generation = getCellsFromDom();
+  let generation = game.getCellsFromDom();
   gameLoop = setInterval(() => {
-    generation = regenerate(generation);
+    generation = game.regenerate(generation);
     game.drawGrid(generation);
   }, 500);
 };
 
 const stop = () => clearInterval(gameLoop);
 
-const attachCellClickEvent = () => {
-  document.querySelector("#grid").addEventListener("click", event => {
-    event.target.className = event.target.className.includes("alive")
-      ? event.target.className.replace(/alive/g, "dead")
-      : event.target.className.replace(/dead/g, "alive");
-  });
-};
-
-const game = {
+window.game = {
   isAlive,
   generate,
   regenerate,
-  getCellsFromDom,
+  countNeighbours,
   drawGrid,
+  attachGridEventHandler,
+  getCellsFromDom,
   start,
-  stop,
-  attachCellClickEvent
+  stop
 };
-
-window.game = game;
