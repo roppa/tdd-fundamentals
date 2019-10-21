@@ -35,7 +35,7 @@ describe("game of life", () => {
   });
 
   describe("countNeighbours function", () => {
-    test("should count 1 for array of one", () => {
+    test("should count 0 for array of one", () => {
       expect(countNeighbours([1], 0)).toEqual(0);
     });
     test("should count 2 neighbours", () => {

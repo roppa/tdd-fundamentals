@@ -1,9 +1,12 @@
 # Javascript Test Driven Development for the real world
 
-Pre-requisites: working knowledge of javascript
-Goal: to create a working example of 'The Game of Life' by using Test Driven Techniques
-Purpose: to get a working understanding of tests, different types of tests, and test driven development
-Tools: Node.js (> v8.4.0), an IDE such as VS Code, a Browser
+**Pre-requisites**: intermediate level of javascript and npm
+
+**Goal**: to create a working example of 'The Game of Life' by using Test Driven Techniques
+
+**Purpose**: to get a working understanding of tests, different types of tests, and test driven development
+
+**Tools**: Node.js (> v8.4.0), an IDE such as VS Code, a modern Browser such as Chrome, Firefox, later version of IE
 
 ## Definitions
 
@@ -107,11 +110,19 @@ Once we have run `npm install` we can being testing using `jest` from the comman
 
 We can also use Jest to check our code coverage using the `coverage` flag: `jest --coverage`. Looking good! Lets now start working on implementing a grid for the game.
 
+## DOM
+
+Jest comes with a **mock** DOM environment, `jsdom`, which simulates the DOM as if you were in the browser! Again, this is one of the great things about Jest - it covers a lot of bases.
+
+## Example of TDD
+
+We're going to start with the Game of Life algorithm and build it using TDD.
+
 ### Game algorithm
 
-So, starting small or not at all, lets start with our algorithm. We see that we need 2 parameters, whether a cell is alive or dead, and a number of neighbours.
+So, starting small or not at all, we see that we need 2 parameters, whether a cell is alive or dead, and a number of neighbours.
 
-There is one condition that isn't explicitly declared - a dead cell with no neighbours. Lets create our first test:
+There is one condition that isn't explicitly declared - a dead cell with no neighbours. Lets take this for our first test:
 
 ```js
 describe("game of life", () => {
@@ -232,9 +243,9 @@ describe("generate cells", () => {
 });
 ```
 
-## DOM
+## Course
 
-Jest comes with a **mock** DOM environment, `jsdom`, which simulates the DOM as if you were in the browser! Again, this is one of the great things about Jest - it covers a lot of bases.
+The above is a small sample of the [TDD using Javascript and Jest course on Udemy](https://www.udemy.com/course/test-driven-development-using-javascript-and-jest/) which goes into more details about the solution.
 
 ## References
 
