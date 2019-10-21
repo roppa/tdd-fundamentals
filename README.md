@@ -143,7 +143,7 @@ Before jumping into the tests, we'll cover how to create a test file and structu
 
 To start, your tests would be in a folder where your code will be. This makes your code more modular. Inside your code folder you would have a nested folder named `__tests__` where you put your individual test files. You can suffix the same filename you are testing with `.test` or `.spec`, so for example `game.js` would become `game.spec.js`. This helps to see what tests files relates to if you have multiple files.
 
-`expect().toBe()` and `expect().toEqual()` both use [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) for comparasons. However, `expect().toBe()` is used for primitive values, whereas `expect().toEqual()` performs a 'deep' comparason so you can compare two different objects for the same values.
+`expect().toBe()` and `expect().toEqual()` both use [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) for comparasons. However, `expect().toBe()` is used for primitive values, whereas `expect().toEqual()` performs a 'deep' comparason so you can compare two different objects for the same values. Check out [the jest documentation](https://jestjs.io/docs/en/expect) for further methods.
 
 ## Example of TDD
 
