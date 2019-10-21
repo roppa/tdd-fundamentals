@@ -114,6 +114,37 @@ We can also use Jest to check our code coverage using the `coverage` flag: `jest
 
 Jest comes with a **mock** DOM environment, `jsdom`, which simulates the DOM as if you were in the browser! Again, this is one of the great things about Jest - it covers a lot of bases.
 
+## Introduction to a test structure
+
+Before jumping into the tests, we'll cover how to create a test file and structure our tests. Check out the [test-example folder](./test-example).
+
+### Definitions
+
+<dl>
+  <dt><code>test</code> (or the alias <code>it</code>)</dt>
+  <dd>the only part of a test you need, as it runs the assertions within it</dd>
+  <dt><code>describe</code></dt>
+  <dd>creates a code block grouping together several related tests
+  <dt><code>beforeAll</code></dt>
+  <dd>a function ran before all tests in the current file are run. This helps with resetting variables or performing initiation tasks</dd>
+  <dt><code>afterAll</code></dt>
+  <dd>this is ran after all the tests in the current file have been run. Can be used to clean up environment etc</dd>
+  <dt><code>skip</code></dt>
+  <dd>this makes jest ignore the test e.g. <code>test.skip(...</code></dd>
+  <dt><code>only</code></dt>
+  <dd>this ignores all tests in the file apart from the one it is called on e.g. <code>test.only(...</code></dd>
+  <dt><code>beforeEach</code></dt>
+  <dd>this runs a function before every test in the current file. This is helpful for maintaining a default state</dd>
+  <dt><code>afterEach</code></dt>
+  <dd>this runs a function after each test in the current file</dd>
+  <dt><code>expect</code></dt>
+  <dd>this is the assertion function</dd>
+</dl>
+
+To start, your tests would be in a folder where your code will be. This makes your code more modular. Inside your code folder you would have a nested folder named `___tests__` where you put your individual test files. You can suffix the same filename you are testing with `.test` or `.spec`, so for example `game.js` would become `game.spec.js`. This helps to see what tests files relates to if you have multiple files.
+
+`expect().toBe()` and `expect().toEqual()` both use [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) for comparasons. However, `expect().toBe()` is used for primitive values, whereas `expect().toEqual()` performs a 'deep' comparason so you can compare two different objects for the same values.
+
 ## Example of TDD
 
 We're going to start with the Game of Life algorithm and build it using TDD.
