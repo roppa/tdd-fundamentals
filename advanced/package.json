@@ -1,0 +1,16 @@
+{
+  "name": "tdd-advanced",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --coverage",
+    "dev": "jest --coverage --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "jest": "^24.9.0"
+  }
+}
